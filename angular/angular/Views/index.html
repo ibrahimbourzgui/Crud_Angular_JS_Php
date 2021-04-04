@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- index.php !-->
+<html>
+<head>
+    <title>MIAGE ANGULARJS</title>
+    <!-- google font -->
+    <link href="../Views/css/font.css" rel="stylesheet">
+    <!-- bootstrap cdn -->
+    <link rel="stylesheet" href="../Views/css/bootstrap.min.css" />
+    <!-- angular cdn -->
+    <script src="../Views/js/angular.min.js"></script>
+    <!-- my stylesheet -->
+    <link rel="stylesheet" href="../Views/css/style.css">
+    <!-- my script -->
+    <script src='../Views/js/script.js'></script>
+</head>
+<body>
+    <div class="containers">
+        <div ng-app='myApp' ng-controller='myController' ng-init='loadTable()'>
+            <h3><img src="img/ang.png" style="width: 100px; height: 100px;">PRESENTATION ANGULARJS</h3>
+            <div class='withForm'>
+                <div class='d-flex'>
+                    <div>
+                        <label>Nom :</label>
+                        <input type="hidden" ng-model='id'>
+                        <input type="text" ng-model='nom' class='form-control'>
+                    </div>
+                    <div>
+                        <label>Prenom :</label>
+                        <input type="text" ng-model='prenom' class='form-control'>
+                    </div>
+                    <div>
+                        <label>Tel :</label>
+                        <input type="text" ng-model='phone' class='form-control'>
+                    </div>
+                    <div class='buttn'>
+                        <input type="submit" value={{btname}} class='btn btn-success' ng-click='insertIntoDB()'>
+                    </div>
+                    <br> 
+                </div>
+            </div>
+            <div>
+                <label style="text-align: center;">Search :</label>
+                <input type="text" class='form-control' ng-model="search" style="width: 100%;">
+            </div>
+            <h3>MIAGE</h3>
+            <div class='tableHolder'>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Tel</th>
+                        <th>Action</th>
+                    </tr> 
+                    <tr ng-repeat='x in val | filter: search  track by $index '> 
+                        <th>{{x.nom}}</th>
+                        <th>{{x.prenom}}</th>
+                        <th>{{x.tel}}</th>
+                        <th>
+                            <div ng-if="btname == 'Update'">
+                                <button class='btn btn-success' ng-click='updateDB(x.id,x.nom,x.prenom,x.tel)'>ADD</button>
+                                <button class='btn btn-danger' ng-click='deleteDB(x.id)'>Delete</button>
+                            </div>
+                            <div ng-if="btname == 'ADD'">
+                                <button class='btn btn-primary' ng-click='updateDB(x.id,x.nom,x.prenom,x.tel)'>Update</button>
+                                <button class='btn btn-danger' ng-click='deleteDB(x.id)'>Delete</button>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
